@@ -5,7 +5,7 @@ import time
 
 
 
-
+control = False
 pages = ["1", "2" ,"3"]
 for page in pages:
     url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&page='+ page +'&perPage=20&searchSource=GN_BREADCRUMB&sort=relevance&zc=90006'
@@ -46,7 +46,12 @@ for page in pages:
         i = i +1
 
         if i == 50:
-            return
+            control = True
+            break
+
+    if control == True:
+        break
+
 
 
 print(i)
