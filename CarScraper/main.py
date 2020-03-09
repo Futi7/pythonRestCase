@@ -41,7 +41,13 @@ class Main:
                 title = item.find('h2', {'class',classes[0]}).text
                 title = title.strip()
 
-    
+                if "BMW" in title.upper():
+                    brand = "BMW"
+                    model = title.strip("BMW")
+
+                if "FORD" in title.upper():
+                    brand = "Ford"
+                    model = title.strip("Ford")
 
 
 
