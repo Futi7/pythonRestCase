@@ -43,11 +43,11 @@ class Main:
 
                 if "BMW" in title.upper():
                     brand = "BMW"
-                    model = title.strip("BMW")
+                    model = title[8:]
 
                 if "FORD" in title.upper():
                     brand = "Ford"
-                    model = title.strip("Ford")
+                    model = title[9:]
 
 
 
@@ -96,7 +96,8 @@ class Main:
                 rowDict = {
                         'year' : year,
                         'contactNumber' : phone,
-                        'model' : title,
+                        'brand':brand,
+                        'model' : model,
                         'extColor' : extColor,
                         'intColor': intColor,
                         'transmission' : transmission,

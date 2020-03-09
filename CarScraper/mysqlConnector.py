@@ -18,7 +18,6 @@ class Connector:
         placeholders = ', '.join(['%s'] * len(row))
         cols = ', '.join(row.keys())
         sql = "INSERT INTO cars ( %s ) VALUES ( %s )" % (cols, placeholders)
-        val = ("John", "Highway 21")
         self.db.execute(sql, list(row.values()))
         
         
