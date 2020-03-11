@@ -13,11 +13,6 @@ class Main:
         self.control = False
         self.i = 0
 
-
-
-
-
-
     def run(self):
         for page in range(1,50):
             url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&page='+ str(page) +'&perPage=20&searchSource=GN_BREADCRUMB&sort=relevance&zc=90006'
@@ -43,7 +38,7 @@ class Main:
 
                 if "BMW" in title.upper():
                     brand = "BMW"
-                    model = title[8:]
+                    model = title[9:]
 
                 if "FORD" in title.upper():
                     brand = "Ford"

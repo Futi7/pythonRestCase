@@ -7,48 +7,82 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/cars/list', methods = ['GET', 'POST']) 
-def home(): 
-    if(request.method == 'GET'): 
-  
-        data = "Arabalar"
-        return jsonify({'data': data}) 
-  
+class Database:
+    def __init__(self):
+        self.conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        passwd="Akincilar1",
+        database = "restCase"
+        )
 
+        self.db = self.conn.cursor()
+
+
+    def fetchJSON(self, query):
+
+        print(query)
+        self.db.execute(query)
+        result = self.db.fetchall()
+
+
+        
+
+        return jsonify(result)
+
+
+
+    def closeConnection(self):
+        self.conn.commit()
+        self.conn.close()
+
+
+@app.route('/cars/list', methods = ['GET']) 
+def home(): 
+    
     query_parameters = request.args
 
-    id = query_parameters.get('id')
     extcolor = query_parameters.get('extcolor')
     brand = query_parameters.get('brand')
-    brand = query_parameters.get('brand')
+    transmission = query_parameters.get('trans')
+    year = query_parameters.get('year')
 
+
+    db = Database()
+
+    query = "SELECT * FROM cars WHERE"
+    toFilter = []
+
+    if extcolor:
+        query += " extColor='%s' AND"
+        toFilter.append(extcolor)
+
+    if brand:
+        query += " brand='%s' AND"
+        toFilter.append(brand)
+
+    if year:
+        query += " year='%s' AND"
+        toFilter.append(year)
+
+    if transmission:
+        query += " transmission='%s' AND"
+        toFilter.append(transmission)
 
     
+    query = query[:-4]
 
-    query = "SELECT * FROM books WHERE"
-    to_filter = []
+    print(query)
 
-    if id:
-        query += ' id=? AND'
-        to_filter.append(id)
-    if published:
-        query += ' published=? AND'
-        to_filter.append(published)
-    if author:
-        query += ' author=? AND'
-        to_filter.append(author)
-    if not (id or published or author):
+    query = query % tuple(toFilter)
+    return db.fetchJSON(query)
+
+
+    if not (year or brand or transmission or extcolor):
         return page_not_found(404)
 
   
 
-@app.route('/home/<int:num>', methods = ['GET']) 
-def disp(num): 
-  
-    return jsonify({'data': num**2}) 
-  
-  
-# driver function 
 if __name__ == '__main__': 
   
     app.run(debug = True) 
