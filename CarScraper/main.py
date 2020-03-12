@@ -98,7 +98,7 @@ class Main:
                 if "FORD" in title.upper():
                     if self.fordCounter < 50:
                         brand = "Ford"
-                        model = title[9:]
+                        model = title[10:]
                         self.fordCounter += 1
                         print(self.fordCounter)
                         self.scrapeAndInsert(brand, model, title, item, classes)
