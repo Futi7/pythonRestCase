@@ -7,7 +7,7 @@ class Connector:
         self.conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        passwd="Akincilar1",
+        passwd="",## Your password here
         database = "restCase"
         )
 

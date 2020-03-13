@@ -20,7 +20,6 @@ def index():
     template = env.get_template('index.html')
     response = json.dumps(request())
     parsedResponse = json.loads(response)
-    print(parsedResponse)
     return template.render(response = parsedResponse)
 
 

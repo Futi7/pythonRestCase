@@ -12,7 +12,7 @@ class Database:
         self.conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        passwd="Akincilar1",
+        passwd="",##Your password here for database
         database = "restCase"
         )
 
@@ -20,13 +20,8 @@ class Database:
 
 
     def fetchJSON(self, query):
-
-        print(query)
         self.db.execute(query)
         result = self.db.fetchall()
-
-
-        
 
         return jsonify(result)
 
@@ -71,8 +66,6 @@ def home():
 
     
     query = query[:-4]
-
-    print(query)
 
     query = query % tuple(toFilter)
     return db.fetchJSON(query)
