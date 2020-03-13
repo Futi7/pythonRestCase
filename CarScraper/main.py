@@ -87,7 +87,6 @@ class Main:
                         brand = "BMW"
                         model = title[9:]
                         self.bmwCounter += 1
-                        print(self.bmwCounter)
                         self.scrapeAndInsert(brand, model, title, item, classes)
                     else:
                         continue
@@ -99,7 +98,6 @@ class Main:
                         brand = "Ford"
                         model = title[10:]
                         self.fordCounter += 1
-                        print(self.fordCounter)
                         self.scrapeAndInsert(brand, model, title, item, classes)
                     else:
                         continue
