@@ -1,5 +1,4 @@
 import requests
-import csv
 from bs4 import BeautifulSoup as soup
 import time
 from mysqlConnector import Connector
