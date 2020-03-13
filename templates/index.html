@@ -1,0 +1,64 @@
+<html>
+
+<body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-12">
+        <h4>Rest Client</h4>
+        <div class="table-responsive">
+              <table id="mytable" class="table table-bordred table-striped">
+                   
+                   <thead>
+                    <th>ID</th>
+                    <th>Year</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Exterior Color</th>
+                    <th>Interior Color</th>
+                    <th>Transmission</th>
+                    <th>Price</th>
+                    <th>Contact Number</th>
+                   </thead>
+    <tbody>
+    
+        {% for resp in response %}
+    <tr>
+    <td>{{ resp[0] }}</td>
+    <td>{{ resp[1] }}</td>
+    <td>{{ resp[2] }}</td>
+    <td>{{ resp[3] }}</td>
+    <td>{{ resp[4] }}</td>
+    <td>{{ resp[5] }}</td>
+    <td>{{ resp[6] }}</td>
+    <td>{{ resp[7] }}</td>
+    <td>{{ resp[8] }}</td>
+    </tr>
+        {% endfor %}
+    </tbody>
+        
+</table>
+
+<div class="clearfix"></div>
+
+                
+            </div>
+            
+        </div>
+	</div>
+</div>
+
+
+    
+    
+</body>
+
+
+</html>
