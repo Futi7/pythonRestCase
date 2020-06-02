@@ -12,7 +12,7 @@ class Database:
         self.conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        passwd="",##Your password here for database
+        passwd="Akincilar1",
         database = "restCase"
         )
 
@@ -21,9 +21,9 @@ class Database:
 
     def fetchJSON(self, query):
         self.db.execute(query)
-        result = self.db.fetchall()
-
-        return jsonify(result)
+        resp = [dict((self.db.description[i][0], value)
+              for i, value in enumerate(row)) for row in self.db.fetchall()]
+        return jsonify(resp)
 
 
 
