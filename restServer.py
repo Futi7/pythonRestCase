@@ -1,35 +1,18 @@
 import flask
-from flask import request, jsonify
-import mysql.connector
-
+from flask import request, jsonify,  make_response
+from flaskext.mysql import MySQL
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+mysql = MySQL()
 
 
-class Database:
-    def __init__(self):
-        self.conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="",##Your password here for database
-        database = "restCase"
-        )
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Akincilar1'
+app.config['MYSQL_DATABASE_DB'] = 'restCase'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
-        self.db = self.conn.cursor()
-
-
-    def fetchJSON(self, query):
-        self.db.execute(query)
-        result = self.db.fetchall()
-
-        return jsonify(result)
-
-
-
-    def closeConnection(self):
-        self.conn.commit()
-        self.conn.close()
+mysql.init_app(app)
 
 
 @app.route('/cars/list', methods = ['GET']) 
@@ -42,8 +25,7 @@ def home():
     transmission = query_parameters.get('trans')
     year = query_parameters.get('year')
 
-
-    db = Database()
+    
 
     query = "SELECT * FROM cars WHERE"
     toFilter = []
@@ -65,14 +47,24 @@ def home():
         toFilter.append(transmission)
 
     
+    
+    
     query = query[:-4]
 
     query = query % tuple(toFilter)
-    return db.fetchJSON(query)
 
 
-    if not (year or brand or transmission or extcolor):
-        return page_not_found(404)
+
+    cur = mysql.connect().cursor()
+    cur.execute(query)
+    resp = [dict((cur.description[i][0], value)
+              for i, value in enumerate(row)) for row in cur.fetchall()]
+    return jsonify({'data' : resp})
+
+
+
+
+    
 
   
 
