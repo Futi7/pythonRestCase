@@ -31,15 +31,16 @@
     
         {% for resp in response %}
     <tr>
-    <td>{{ resp[0] }}</td>
-    <td>{{ resp[1] }}</td>
-    <td>{{ resp[2] }}</td>
-    <td>{{ resp[3] }}</td>
-    <td>{{ resp[4] }}</td>
-    <td>{{ resp[5] }}</td>
-    <td>{{ resp[6] }}</td>
-    <td>{{ resp[7] }}</td>
-    <td>{{ resp[8] }}</td>
+    <td>{{ resp['ID'] }}</td>
+    <td>{{ resp['year'] }}</td>
+    <td>{{ resp['brand'] }}</td>
+    <td>{{ resp['model'] }}</td>
+    <td>{{ resp['extColor'] }}</td>
+    <td>{{ resp['intColor'] }}</td>
+    <td>{{ resp['transmission'] }}</td>
+    <td>{{ resp['price'] }}</td>
+    <td>{{ resp['contactNumber'] }}</td>
+    
     </tr>
         {% endfor %}
     </tbody>
